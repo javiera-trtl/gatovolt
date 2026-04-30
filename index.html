@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GatoVolt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Share+Tech+Mono&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0a0f1e;
+      --blue:   #1a8fe3;
+      --yellow: #f5c518;
+      --white:  #eef2ff;
+      --dim:    #6b7a99;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── Grid background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(26,143,227,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,143,227,.07) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Glow blobs ── */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: .18;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob-1 { width: 500px; height: 500px; background: var(--blue);   top: -120px; left: -100px; }
+    .blob-2 { width: 400px; height: 400px; background: var(--yellow); bottom: -80px; right: -80px; animation: drift 8s ease-in-out infinite alternate; }
+
+    @keyframes drift { from { transform: translate(0,0); } to { transform: translate(-30px, -20px); } }
+
+    /* ── Layout ── */
+    main {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+      gap: 2rem;
+    }
+
+    /* ── Logo ── */
+    .logo-wrap {
+      animation: fadeUp .8s ease both;
+    }
+    .logo-wrap img {
+      width: min(340px, 80vw);
+      height: auto;
+      filter: drop-shadow(0 0 32px rgba(245,197,24,.25)) drop-shadow(0 0 8px rgba(26,143,227,.3));
+    }
+
+    /* ── Name ── */
+    .brand {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(2.4rem, 8vw, 5rem);
+      font-weight: 700;
+      letter-spacing: .04em;
+      line-height: 1;
+      animation: fadeUp .8s .15s ease both;
+    }
+    .brand span { color: var(--yellow); }
+
+    /* ── Tagline ── */
+    .tagline {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: clamp(.75rem, 2vw, .95rem);
+      letter-spacing: .22em;
+      color: var(--blue);
+      text-transform: uppercase;
+      animation: fadeUp .8s .25s ease both;
+    }
+    .tagline::before { content: '[ '; }
+    .tagline::after  { content: ' ]'; }
+
+    /* ── Divider ── */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      animation: fadeUp .8s .35s ease both;
+    }
+
+    /* ── Status pill ── */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      border: 1px solid rgba(26,143,227,.3);
+      border-radius: 999px;
+      padding: .45rem 1.1rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .8rem;
+      color: var(--dim);
+      background: rgba(26,143,227,.06);
+      letter-spacing: .08em;
+      animation: fadeUp .8s .45s ease both;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 6px var(--yellow);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; } 50% { opacity: .3; }
+    }
+
+    /* ── Icons row ── */
+    .icons {
+      display: flex;
+      gap: 1.4rem;
+      align-items: center;
+      animation: fadeUp .8s .55s ease both;
+    }
+    .icon-item {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1rem;
+      color: var(--blue);
+      opacity: .55;
+      transition: opacity .2s, color .2s;
+    }
+    .icon-item:hover { opacity: 1; color: var(--yellow); }
+    .sep { color: var(--dim); opacity: .3; font-size: .8rem; }
+
+    /* ── Footer ── */
+    footer {
+      position: fixed;
+      bottom: 1.2rem;
+      left: 0; right: 0;
+      text-align: center;
+      font-size: .7rem;
+      color: var(--dim);
+      letter-spacing: .06em;
+      z-index: 1;
+      opacity: .5;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <main>
+    <div class="logo-wrap">
+      <!-- Replace src with your logo filename once uploaded -->
+      <img src="logo.png" alt="GatoVolt logo" />
+    </div>
+
+    <h1 class="brand">GATO<span>VOLT</span></h1>
+
+    <p class="tagline">Tecnología · Energía · Creatividad</p>
+
+    <div class="divider"></div>
+
+    <div class="status">
+      <span class="dot"></span>
+      Próximamente — algo interesante se viene
+    </div>
+
+    <div class="icons">
+      <span class="icon-item">&lt;/&gt;</span>
+      <span class="sep">|</span>
+      <span class="icon-item">∞</span>
+      <span class="sep">|</span>
+      <span class="icon-item">⚡</span>
+    </div>
+  </main>
+
+  <footer>© 2026 GatoVolt</footer>
+</body>
+</html>
